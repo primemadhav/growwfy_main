@@ -1,0 +1,756 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-outfit: "Outfit", "Inter", sans-serif;
+  --color-brand-primary: #5850EC;
+  --color-brand-secondary: #8B5CF6;
+  --color-brand-dark: #0A0A0A;
+
+  --animate-marquee: marquee var(--duration, 30s) linear infinite;
+  --animate-marquee-reverse: marquee-reverse var(--duration, 30s) linear infinite;
+  --animate-background-gradient: background-gradient var(--background-gradient-speed, 15s) cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+  --animate-accordion-down: accordion-down 300ms ease;
+  --animate-accordion-up: accordion-up 300ms ease;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-reverse {
+    to { transform: translateX(0%); }
+    from { transform: translateX(-50%); }
+  }
+  @keyframes accordion-down {
+    from { height: 0; opacity: 0; }
+    to { height: var(--radix-accordion-content-height); opacity: 1; }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); opacity: 1; }
+    to { height: 0; opacity: 0; }
+  }
+  @keyframes background-gradient {
+    0%, 100% {
+      transform: translate(0, 0);
+      animation-delay: var(--background-gradient-delay, 0s);
+    }
+    20% {
+      transform: translate(calc(100% * var(--tx-1, 1)), calc(100% * var(--ty-1, 1)));
+    }
+    40% {
+      transform: translate(calc(100% * var(--tx-2, -1)), calc(100% * var(--ty-2, 1)));
+    }
+    60% {
+      transform: translate(calc(100% * var(--tx-3, 1)), calc(100% * var(--ty-3, -1)));
+    }
+    80% {
+      transform: translate(calc(100% * var(--tx-4, -1)), calc(100% * var(--ty-4, -1)));
+    }
+  }
+}
+
+:root {
+  --sky-400: #38bdf8;
+  --sky-500: #0ea5e9;
+}
+
+.dark {
+  --sky-400: #38bdf8;
+  --sky-500: #0ea5e9;
+}
+
+/* Custom logo fill and text color helper for light/dark transitions */
+.fill-logo {
+  fill: #ffffff !important;
+}
+.light .fill-logo {
+  fill: #27272a !important;
+}
+
+.text-logo {
+  color: #ffffff !important;
+}
+.light .text-logo {
+  color: #27272a !important;
+}
+
+@layer base {
+  body {
+    background-color: #09090b; /* Zinc 950 */
+    color: #f4f4f5; /* Zinc 100 */
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Glow effects */
+.glow-card {
+  box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glow-card:hover {
+  box-shadow: 0 0 50px -5px rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* Google Stitch dot matrix background */
+.stitch-dots-bg {
+  background-image: radial-gradient(rgba(14, 165, 233, 0.28) 0.8px, transparent 0.8px);
+  background-size: 12px 12px;
+}
+
+.light .stitch-dots-bg {
+  background-image: radial-gradient(rgba(9, 9, 11, 0.16) 0.8px, transparent 0.8px);
+  background-size: 12px 12px;
+}
+
+/* Floating blur blobs animations */
+@keyframes stitch-float-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(50px, -40px) scale(1.15) rotate(120deg);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.9) rotate(240deg);
+  }
+}
+
+@keyframes stitch-float-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-60px, 50px) scale(1.2) rotate(-180deg);
+  }
+}
+
+@keyframes stitch-float-3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(40px, 60px) scale(0.85);
+  }
+}
+
+.animate-stitch-blob-1 {
+  animation: stitch-float-1 25s infinite ease-in-out;
+}
+
+.animate-stitch-blob-2 {
+  animation: stitch-float-2 30s infinite ease-in-out;
+}
+
+.animate-stitch-blob-3 {
+  animation: stitch-float-3 20s infinite ease-in-out;
+}
+
+/* Light mode overrides */
+.light {
+  color-scheme: light;
+  background-color: #fafafa !important;
+  color: #18181b !important;
+  
+  --color-zinc-950: #fafafa; /* main light bg */
+  --color-zinc-900: #ffffff; /* light card bg */
+  --color-zinc-850: #f4f4f5; /* custom border helper */
+  --color-zinc-800: #e4e4e7; /* light gray border */
+  --color-zinc-700: #d4d4d8; /* light gray border secondary */
+  --color-zinc-600: #a1a1aa; /* text mute helper */
+  --color-zinc-500: #71717a; /* light mode text-zinc-500 */
+  --color-zinc-400: #52525b; /* light mode text-zinc-400 */
+  --color-zinc-300: #3f3f46; /* light mode text-zinc-300 */
+  --color-zinc-200: #18181b; /* light mode text-zinc-200 */
+  --color-zinc-100: #09090b; /* light mode text-zinc-100 */
+}
+
+.light body {
+  background-color: #fafafa !important;
+  color: #18181b !important;
+}
+
+/* Global scrollbar behavior for light theme */
+.light ::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #e4e4e7;
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d8;
+}
+
+/* Heading & Text Color overrides in light mode */
+.light h1:not(.bypass-contrast):not(.bypass-contrast *), 
+.light h2:not(.bypass-contrast):not(.bypass-contrast *), 
+.light h3:not(.bypass-contrast):not(.bypass-contrast *), 
+.light h4:not(.bypass-contrast):not(.bypass-contrast *), 
+.light h5:not(.bypass-contrast):not(.bypass-contrast *), 
+.light h6:not(.bypass-contrast):not(.bypass-contrast *),
+.light .text-white:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #09090b !important;
+}
+
+/* Ensure solid action buttons, blue/emerald accents and elements with keep-white stay readable in white */
+.light .bg-blue-600,
+.light .bg-blue-600 *,
+.light .bg-emerald-500,
+.light .bg-emerald-500 *,
+.light .bg-purple-600,
+.light .bg-purple-600 *,
+.light .keep-white,
+.light .keep-white * {
+  color: #ffffff !important;
+}
+
+/* Avoid invert behavior on buttons, badges and specialized visual accents */
+.light .bg-gradient-to-r,
+.light .bg-gradient-to-tr,
+.light .bg-gradient-to-br {
+  /* Retain bright accent buttons and cards background gradients */
+}
+
+.light .bg-emerald-500,
+.light .bg-blue-600,
+.light .bg-cyan-500,
+.light .bg-purple-600 {
+  /* Retain primary button backgrounds */
+}
+
+/* Light theme card background shadows for premium depth */
+.light .bg-zinc-900\/40,
+.light .bg-zinc-900\/60,
+.light .bg-zinc-900\/30,
+.light .bg-zinc-950\/80 {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -1px rgba(0, 0, 0, 0.03);
+}
+
+.light .border-zinc-800\/80,
+.light .border-zinc-850,
+.light .border-zinc-900 {
+  border-color: #e4e4e7 !important;
+}
+
+/* Contact form inputs in light theme */
+.light input:not([type="range"]),
+.light textarea,
+.light select {
+  background-color: #ffffff !important;
+  color: #09090b !important;
+  border-color: #e4e4e7 !important;
+}
+
+/* Range slider track styling to ensure high visibility in both light and dark themes */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px !important; /* Elegant spacious height so thumb is never clipped or misaligned */
+  background: transparent !important; /* Make parent transparent so only custom track is visible */
+  cursor: pointer;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+/* Custom Track styling - Webkit (Chrome, Safari, Edge) */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px !important;
+  border-radius: 9999px !important;
+  background-color: #27272a !important; /* Elegant dark grey for dark mode */
+}
+
+.light input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #cbd5e1 !important; /* Elegant high-contrast slate grey for light mode */
+}
+
+/* Custom Track styling - Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 6px !important;
+  border-radius: 9999px !important;
+  background-color: #27272a !important;
+}
+
+.light input[type="range"]::-moz-range-track {
+  background-color: #cbd5e1 !important;
+}
+
+/* Base Custom Thumb styling - Webkit (Chrome, Safari, Edge) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+  margin-top: -6px !important; /* Centering formula: (track_height/2) - (thumb_height/2) = 3px - 9px = -6px */
+  cursor: pointer !important;
+  transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Base Custom Thumb styling - Mozilla Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Accent Color Mappings for Custom Thumbs */
+input[type="range"].accent-purple-500::-webkit-slider-thumb {
+  background-color: #a855f7 !important;
+}
+input[type="range"].accent-purple-500::-moz-range-thumb {
+  background-color: #a855f7 !important;
+}
+
+input[type="range"].accent-indigo-500::-webkit-slider-thumb {
+  background-color: #6366f1 !important;
+}
+input[type="range"].accent-indigo-500::-moz-range-thumb {
+  background-color: #6366f1 !important;
+}
+
+input[type="range"].accent-emerald-500::-webkit-slider-thumb {
+  background-color: #10b981 !important;
+}
+input[type="range"].accent-emerald-500::-moz-range-thumb {
+  background-color: #10b981 !important;
+}
+
+input[type="range"].accent-amber-500::-webkit-slider-thumb {
+  background-color: #f59e0b !important;
+}
+input[type="range"].accent-amber-500::-moz-range-thumb {
+  background-color: #f59e0b !important;
+}
+
+.light input:focus,
+.light textarea:focus,
+.light select:focus {
+  border-color: #10b981 !important;
+}
+
+/* 
+ * CRITICAL READABILITY OVERRIDES
+ * Makes body copy, lists, descriptions, and metadata text bold & high contrast.
+ */
+p, li, .text-zinc-400, .text-zinc-300, .text-zinc-500, label {
+  font-weight: 500 !important; /* Forces normal/light text to medium weight */
+}
+
+/* High contrast dark theme text fallback */
+.dark p:not(button *):not(.bypass-contrast):not(.bypass-contrast *), 
+.dark li:not(button *):not(.bypass-contrast):not(.bypass-contrast *), 
+.dark span:not(button *):not(.text-emerald-500):not(.text-red-500):not(.text-blue-500):not(.text-yellow-400):not(.text-brand-primary):not(.text-brand-secondary):not(.text-indigo-400):not(.text-violet-400):not(.text-purple-400):not(.text-green-400):not(.text-red-400):not(.text-blue-400):not(.bypass-contrast):not(.bypass-contrast *),
+.dark div:not(button *):not(.bg-gradient-to-tr):not(.text-brand-primary):not(.text-brand-secondary):not(.bg-brand-primary):not(.bg-brand-secondary):not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #f4f4f5 !important; /* Forces ultra bright grey text */
+}
+
+/* Ensure button text and icon content is highly readable on white backgrounds in dark mode */
+.dark button.bg-white,
+.dark button.bg-white *,
+.dark button.dark\:bg-white,
+.dark button.dark\:bg-white * {
+  color: #09090b !important;
+}
+
+/* High contrast light theme text fallback */
+.light p:not(button *):not(.bypass-contrast):not(.bypass-contrast *), 
+.light li:not(button *):not(.bypass-contrast):not(.bypass-contrast *), 
+.light span:not(button *):not(.text-emerald-500):not(.text-red-500):not(.text-blue-500):not(.text-yellow-400):not(.text-brand-primary):not(.text-brand-secondary):not(.text-indigo-400):not(.text-violet-400):not(.text-purple-400):not(.text-green-400):not(.text-red-400):not(.text-blue-400):not(.bypass-contrast):not(.bypass-contrast *),
+.light div:not(button *):not(.bg-gradient-to-tr):not(.text-brand-primary):not(.text-brand-secondary):not(.bg-brand-primary):not(.bg-brand-secondary):not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #0f172a !important; /* Forces dark slate text */
+}
+
+/* Adjust secondary description items */
+.text-zinc-400:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #e4e4e7 !important; /* Brighter grey in dark mode */
+}
+.light .text-zinc-400:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #334155 !important; /* High contrast slate in light mode */
+}
+
+.text-zinc-500:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #d4d4d8 !important; /* Brighter grey in dark mode */
+}
+.light .text-zinc-500:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #475569 !important; /* High contrast slate in light mode */
+}
+
+.text-zinc-300:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #fafafa !important; /* Max contrast in dark mode */
+}
+.light .text-zinc-300:not(.bypass-contrast):not(.bypass-contrast *) {
+  color: #0f172a !important; /* Max contrast in light mode */
+}
+
+/* Infinite Horizontal Marquee Animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 35s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 35s linear infinite;
+}
+
+/* Pause marquee on hover to allow exploration */
+.marquee-container:hover .animate-marquee-left,
+.marquee-container:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+/* Premium Meteors Animation */
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 0;
+  }
+  4% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-1500px);
+    opacity: 0;
+  }
+}
+
+.meteor-item {
+  position: absolute;
+  height: 1.5px;
+  width: 1.5px;
+  border-radius: 9999px;
+  background-color: rgba(14, 165, 233, 0.85); /* Premium brand cyan */
+  pointer-events: none;
+  opacity: 0;
+  animation: meteor var(--duration) var(--delay) linear infinite;
+  will-change: transform, opacity;
+}
+
+.dark .meteor-item {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.2);
+}
+
+.meteor-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.5) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.dark .meteor-item::before {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
+}
+
+@layer base {
+  @property --pos-x {
+    syntax: '<percentage>';
+    initial-value: 11.14%;
+    inherits: false;
+  }
+
+  @property --pos-y {
+    syntax: '<percentage>';
+    initial-value: 140%;
+    inherits: false;
+  }
+
+  @property --spread-x {
+    syntax: '<percentage>';
+    initial-value: 150%;
+    inherits: false;
+  }
+
+  @property --spread-y {
+    syntax: '<percentage>';
+    initial-value: 180.06%;
+    inherits: false;
+  }
+
+  @property --color-1 {
+    syntax: '<color>';
+    initial-value: #000;
+    inherits: false;
+  }
+
+  @property --color-2 {
+    syntax: '<color>';
+    initial-value: #08012c;
+    inherits: false;
+  }
+
+  @property --color-3 {
+    syntax: '<color>';
+    initial-value: #4e1e40;
+    inherits: false;
+  }
+
+  @property --color-4 {
+    syntax: '<color>';
+    initial-value: #70464e;
+    inherits: false;
+  }
+
+  @property --color-5 {
+    syntax: '<color>';
+    initial-value: #88394c;
+    inherits: false;
+  }
+
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 20deg;
+    inherits: true;
+  }
+
+  @property --border-color-1 {
+    syntax: '<color>';
+    initial-value: hsla(340, 75%, 60%, 0.2);
+    inherits: true;
+  }
+
+  @property --border-color-2 {
+    syntax: '<color>';
+    initial-value: hsla(340, 75%, 40%, 0.75);
+    inherits: true;
+  }
+
+  @property --stop-1 {
+    syntax: '<percentage>';
+    initial-value: 37.35%;
+    inherits: false;
+  }
+
+  @property --stop-2 {
+    syntax: '<percentage>';
+    initial-value: 61.36%;
+    inherits: false;
+  }
+
+  @property --stop-3 {
+    syntax: '<percentage>';
+    initial-value: 78.42%;
+    inherits: false;
+  }
+
+  @property --stop-4 {
+    syntax: '<percentage>';
+    initial-value: 89.52%;
+    inherits: false;
+  }
+
+  @property --stop-5 {
+    syntax: '<percentage>';
+    initial-value: 100%;
+    inherits: false;
+  }
+}
+
+@layer components {
+  /* Enforce white text for gradient button in both light and dark modes */
+  .gradient-button,
+  .gradient-button *,
+  .light .gradient-button,
+  .light .gradient-button *,
+  button.gradient-button,
+  button.gradient-button * {
+    color: #ffffff !important;
+  }
+
+  .gradient-button {
+    @apply relative appearance-none cursor-pointer;
+    /* Ultra-vibrant attention-grabbing Sunset-Rose-Violet gradient */
+    --color-1: #d946ef; /* Fuchsia */
+    --color-2: #ec4899; /* Vibrant Pink */
+    --color-3: #f97316; /* Sunset Orange */
+    --color-4: #8b5cf6; /* Violet */
+    --color-5: #4f46e5; /* Electric Indigo */
+    --border-color-1: hsla(320, 95%, 70%, 0.5);
+    --border-color-2: hsla(20, 95%, 60%, 0.95);
+
+    background: radial-gradient(
+      var(--spread-x) var(--spread-y) at var(--pos-x) var(--pos-y),
+      var(--color-1) var(--stop-1),
+      var(--color-2) var(--stop-2),
+      var(--color-3) var(--stop-3),
+      var(--color-4) var(--stop-4),
+      var(--color-5) var(--stop-5)
+    );
+    transition:
+      --pos-x 0.5s,
+      --pos-y 0.5s,
+      --spread-x 0.5s,
+      --spread-y 0.5s,
+      --color-1 0.5s,
+      --color-2 0.5s,
+      --color-3 0.5s,
+      --color-4 0.5s,
+      --color-5 0.5s,
+      --border-angle 0.5s,
+      --border-color-1 0.5s,
+      --border-color-2 0.5s,
+      --stop-1 0.5s,
+      --stop-2 0.5s,
+      --stop-3 0.5s,
+      --stop-4 0.5s,
+      --stop-5 0.5s;
+  }
+
+  .gradient-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      var(--border-angle),
+      var(--border-color-1),
+      var(--border-color-2)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .gradient-button:hover {
+    --pos-x: 0%;
+    --pos-y: 91.51%;
+    --spread-x: 125.24%;
+    --spread-y: 105.18%;
+    --color-1: #fb7185; /* Soft Rose */
+    --color-2: #f472b6; /* Pink Glow */
+    --color-3: #fb923c; /* Bright Orange */
+    --color-4: #c084fc; /* Light Violet */
+    --color-5: #6366f1; /* Glowing Indigo */
+    --border-angle: 190deg;
+    --border-color-1: hsla(330, 95%, 90%, 0.4);
+    --border-color-2: hsla(25, 95%, 90%, 0.95);
+    --stop-1: 0%;
+    --stop-2: 8.8%;
+    --stop-3: 21.44%;
+    --stop-4: 71.34%;
+    --stop-5: 85.76%;
+  }
+
+  .gradient-button-variant {
+    /* Highly elegant deep indigo-slate cosmic variant */
+    --color-1: #0f172a; /* Slate 900 */
+    --color-2: #1e1b4b; /* Indigo 950 */
+    --color-3: #311042; /* Deep purple */
+    --color-4: #4c1d95; /* Violet 900 */
+    --color-5: #1e293b; /* Slate 800 */
+    --border-angle: 200deg;
+    --border-color-1: hsla(260, 70%, 75%, 0.4);
+    --border-color-2: hsla(260, 50%, 50%, 0.4);
+  }
+
+  .gradient-button-variant:hover {
+    --pos-x: 0%;
+    --pos-y: 95.51%;
+    --spread-x: 110.24%;
+    --spread-y: 110.2%;
+    --color-1: #4f46e5; /* Active Indigo */
+    --color-2: #7c3aed; /* Active Violet */
+    --color-3: #db2777; /* Active Pink */
+    --color-4: #1e1b4b;
+    --color-5: #0f172a;
+    --stop-1: 0%;
+    --stop-2: 10%;
+    --stop-3: 35.44%;
+    --stop-4: 71.34%;
+    --stop-5: 90.76%;
+    --border-angle: 210deg;
+    --border-color-1: hsla(270, 85%, 85%, 0.5);
+    --border-color-2: hsla(270, 70%, 80%, 0.85);
+  }
+}
+
+
+
+

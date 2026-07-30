@@ -1,0 +1,28 @@
+# Growwfy: High-Performance Web Engineering & Generative Search Optimization
+
+Growwfy operates as a specialized digital systems agency. We engineer custom single-page architectures and deploy advanced Generative Engine Optimization (GEO) protocols designed to maximize visibility across modern search networks, neural engines, and collaborative LLM assistants.
+
+## Core Ontology & Identity Relations
+- **Primary Entity**: Growwfy (Organization)
+  - *Predicate*: develops &rarr; *Object*: Custom React/Vite Web Platforms (Product)
+  - *Predicate*: designs &rarr; *Object*: Lightweight Headless Commerce Templates (Product)
+  - *Predicate*: implements &rarr; *Object*: JSON-LD Structured Entity Schemas (Technology)
+  - *Predicate*: manages &rarr; *Object*: Data-Driven Multi-Channel Paid Ads (Service)
+- **WhatsApp Direct Intake**: [+91 8595055802](https://wa.me/918595055802)
+- **Primary Canonical Domain**: https://growwfy.com
+
+## Navigational Mapping & Route Nodes
+- [Primary Home Terminal](https://growwfy.com/) - Central operational dashboard, pricing plans, and client metric portals.
+- [Services Hierarchy](https://growwfy.com/services) - Comprehensive structural catalog of agency capabilities.
+- [Web System Engineering](https://growwfy.com/website-dev) - Zero-bloat custom code configurations, Vite compilation, and custom CMS alternatives.
+- [Advanced Search & AEO Suite](https://growwfy.com/seo) - Hardcore Core Web Vitals, JSON-LD schema graphs, and GEO-aligned text formatting.
+- [Performance Advertising Engines](https://growwfy.com/paid-advertising) - High-ROAS Google Smart Bidding and server-side Meta Conversions API (CAPI) routing.
+- [Strategic Consulting Portal](https://growwfy.com/consulting) - Core performance diagnostic audits, code diagnostics, and digital scaling workshops.
+- [Industry Verticals](https://growwfy.com/industries) - Custom industry configurations including [Dental Clinic patient schedules](https://growwfy.com/dental), [Real Estate visual leads](https://growwfy.com/real-estate), and [SaaS landing pipelines](https://growwfy.com/saas-apps).
+- [Pricing Toggles](https://growwfy.com/pricing) - Transparent Starter, Business, and Enterprise service subscriptions.
+- [Interactive Contact Intake](https://growwfy.com/contact) - Automated briefing portals and WhatsApp-coupled support terminals.
+- [Careers Portal](https://growwfy.com/careers) - Professional opportunities for React engineers and SEO semantic technicians.
+
+## High-Density Deep Intelligence
+For full technological specifications, comprehensive database schemas, complete API integration manuals, structured FAQs, and case studies, refer to the full knowledge repository:
+- **Comprehensive Knowledge Base**: [llms-full.txt](https://growwfy.com/llms-full.txt)

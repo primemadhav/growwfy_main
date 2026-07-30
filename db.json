@@ -1,0 +1,102 @@
+{
+  "user": {
+    "id": "usr_984572948",
+    "name": "Madhav",
+    "email": "userismadhav@gmail.com",
+    "companyName": "Madhav's Agency",
+    "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+    "activePlan": "none",
+    "subscriptionStatus": "none",
+    "billingCycle": "monthly",
+    "createdAt": "2026-07-23T13:16:00.013Z",
+    "notifications": {
+      "marketing": false,
+      "projectUpdates": true,
+      "billing": true
+    }
+  },
+  "transactions": [],
+  "milestones": [
+    {
+      "id": "m1",
+      "title": "Strategic Onboarding",
+      "description": "Establish branding, site requirements, and SEO search volume analysis.",
+      "status": "completed",
+      "updatedAt": "2026-07-21T13:16:00.013Z"
+    },
+    {
+      "id": "m2",
+      "title": "Design Concepts & SEO Structure",
+      "description": "Draft the visual UI styleboard, layout designs, and URL architecture map.",
+      "status": "in_progress",
+      "updatedAt": "2026-07-23T01:16:00.013Z"
+    },
+    {
+      "id": "m3",
+      "title": "Custom Development & Engineering",
+      "description": "High-performance React/Vite clean-code frontend construction.",
+      "status": "upcoming",
+      "updatedAt": "2026-07-23T13:16:00.013Z"
+    },
+    {
+      "id": "m4",
+      "title": "Meta Tags & Copy Tuning",
+      "description": "Deep SEO copywriting, structured JSON-LD schema, and speed tuning.",
+      "status": "upcoming",
+      "updatedAt": "2026-07-23T13:16:00.013Z"
+    },
+    {
+      "id": "m5",
+      "title": "Launch & Analytics Hookup",
+      "description": "Secure SSL deployment, Google Search Console index request, and analytics setups.",
+      "status": "upcoming",
+      "updatedAt": "2026-07-23T13:16:00.013Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_9gmeka4fu",
+      "name": "Madhav",
+      "email": "userismadhav@gmail.com",
+      "phone": "675875765",
+      "subject": "General Agency Inquiry",
+      "message": "hfukfuyy",
+      "createdAt": "2026-07-30T15:07:35.753Z",
+      "status": "unread",
+      "utm": {
+        "source": "",
+        "medium": "",
+        "campaign": "",
+        "content": "",
+        "term": ""
+      }
+    },
+    {
+      "id": "msg_k3kce1sw2",
+      "name": "Madhav",
+      "email": "userismadhav@gmail.com",
+      "phone": "908708078987",
+      "subject": "General Agency Inquiry",
+      "message": "jkblkjbjbibh",
+      "createdAt": "2026-07-30T14:49:15.794Z",
+      "status": "unread",
+      "utm": {
+        "source": "",
+        "medium": "",
+        "campaign": "",
+        "content": "",
+        "term": ""
+      }
+    },
+    {
+      "id": "msg_1",
+      "name": "Sarah Jenkins",
+      "email": "sarah@designcollective.io",
+      "phone": "+91 8595055802",
+      "subject": "E-commerce Redesign Inquiry",
+      "message": "Hello, we are looking for a complete overhaul of our web presence with custom-tailored SEO structures. We loved the aesthetic of Growwfy.com and wanted to know your timeline for a full custom shop platform. Looking forward to speaking!",
+      "createdAt": "2026-07-22T13:16:00.013Z",
+      "status": "unread"
+    }
+  ]
+}
