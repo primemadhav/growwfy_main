@@ -9,7 +9,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
-import { Resend } from 'resend';
+import { sendContactMessage } from './lib/contact';
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -341,107 +341,14 @@ app.put('/api/profile', (req, res) => {
   res.json({ message: 'Profile updated successfully', user: db.user });
 });
 
-// 3. POST Contact Message
-type ContactInput = {
-  name?: unknown;
-  email?: unknown;
-  subject?: unknown;
-  message?: unknown;
-};
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const cleanText = (value: unknown, maxLength: number) => {
-  if (typeof value !== 'string') return null;
-  const cleaned = value.replace(/[\u0000-\u001F\u007F]/g, ' ').trim();
-  return cleaned && cleaned.length <= maxLength ? cleaned : null;
-};
-
-const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;',
-})[character] as string);
-
-const getClientIp = (req: express.Request) => {
-  const forwardedFor = req.headers['x-forwarded-for'];
-  const forwardedIp = Array.isArray(forwardedFor) ? forwardedFor[0] : forwardedFor?.split(',')[0];
-  return (forwardedIp?.trim() || req.socket.remoteAddress || 'Unavailable').slice(0, 128);
-};
-
 app.post('/api/contact', async (req, res) => {
-  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
-    return res.status(400).json({ success: false, error: 'Invalid request body.' });
-  }
-
-  const { name: rawName, email: rawEmail, subject: rawSubject, message: rawMessage } = req.body as ContactInput;
-  const name = cleanText(rawName, 100);
-  const email = cleanText(rawEmail, 254)?.toLowerCase();
-  const subject = rawSubject === undefined ? 'Not provided' : cleanText(rawSubject, 200);
-  const message = cleanText(rawMessage, 5_000);
-
-  if (!name || !email || !EMAIL_PATTERN.test(email) || !subject || !message) {
-    return res.status(400).json({ success: false, error: 'Please provide a valid name, email, subject, and message.' });
-  }
-
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !to || !from) {
-    console.error('[Contact] Missing required Resend configuration.');
-    return res.status(500).json({ success: false, error: 'Contact service is temporarily unavailable.' });
-  }
-
-  const submittedAt = new Date().toISOString();
-  const ip = getClientIp(req);
-  const userAgent = (req.get('user-agent') || 'Unavailable').slice(0, 1_000);
-  const text = [
-    'New website inquiry',
-    '',
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Subject: ${subject}`,
-    `Message:`,
-    message,
-    '',
-    `Submitted: ${submittedAt}`,
-    `IP address: ${ip}`,
-    `User-Agent: ${userAgent}`,
-  ].join('\n');
-  const html = `
-    <h2>New website inquiry</h2>
-    <p><strong>Name:</strong> ${escapeHtml(name)}<br />
-    <strong>Email:</strong> ${escapeHtml(email)}<br />
-    <strong>Subject:</strong> ${escapeHtml(subject)}</p>
-    <p><strong>Message:</strong><br />${escapeHtml(message).replace(/\n/g, '<br />')}</p>
-    <hr />
-    <p><strong>Submitted:</strong> ${escapeHtml(submittedAt)}<br />
-    <strong>IP address:</strong> ${escapeHtml(ip)}<br />
-    <strong>User-Agent:</strong> ${escapeHtml(userAgent)}</p>`;
-
-  try {
-    const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
-      from,
-      to: [to],
-      replyTo: email,
-      subject: `New Website Inquiry — ${name}`,
-      text,
-      html,
-    });
-
-    if (error) {
-      console.error('[Contact] Resend rejected email:', error.name, error.message);
-      return res.status(502).json({ success: false, error: 'Unable to send your message right now. Please try again.' });
-    }
-
-    return res.status(200).json({ success: true, message: 'Message sent successfully!' });
-  } catch (error) {
-    console.error('[Contact] Resend request failed:', error instanceof Error ? error.message : 'Unknown error');
-    return res.status(502).json({ success: false, error: 'Unable to send your message right now. Please try again.' });
-  }
+  const result = await sendContactMessage({
+    body: req.body,
+    forwardedFor: req.headers['x-forwarded-for'],
+    remoteAddress: req.socket.remoteAddress,
+    userAgent: req.get('user-agent'),
+  });
+  return res.status(result.status).json(result.body);
 });
 
 app.all('/api/contact', (req, res) => {
@@ -567,7 +474,7 @@ app.post('/api/cancel', (req, res) => {
 
   db.user.activePlan = 'none';
   db.user.subscriptionStatus = 'none';
-  
+
   writeDb(db);
   res.json({ success: true, message: 'Subscription canceled successfully', user: db.user });
 });

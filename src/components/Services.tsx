@@ -44,7 +44,7 @@ export default function Services({ onLearnMore }: ServicesProps) {
   ];
 
   return (
-    <section className="relative py-20 bg-zinc-900/40 border-y border-zinc-900">
+    <section className="relative overflow-hidden py-20 bg-zinc-900/40 border-y border-zinc-900">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-emerald-500/5 blur-[150px] pointer-events-none" />
 
