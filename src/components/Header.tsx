@@ -45,6 +45,13 @@ interface HeaderProps {
   setServicesCategory?: (category: 'all' | 'website-dev' | 'seo' | 'google-ads' | 'meta-ads' | 'smm') => void;
 }
 
+const serviceMenuItems = [
+  { label: 'Paid Advertising', id: 'paid-advertising' },
+  { label: 'SEO', id: 'seo' },
+  { label: 'Website Development', id: 'website-dev' },
+  { label: 'Consulting', id: 'consulting' },
+];
+
 export default function Header({ 
   activeTab, 
   setActiveTab, 
@@ -195,12 +202,7 @@ export default function Header({
                   {isServicesOpen && (
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72 z-50">
                       <div className="bg-white dark:bg-zinc-950 border border-zinc-200/90 dark:border-zinc-800/90 rounded-2xl p-3.5 shadow-2xl space-y-1.5">
-                        {[
-                          { label: 'Paid Advertising', id: 'paid-advertising' },
-                          { label: 'SEO', id: 'seo' },
-                          { label: 'Website Development', id: 'website-dev' },
-                          { label: 'Consulting', id: 'consulting' }
-                        ].map((item) => (
+                        {serviceMenuItems.map((item) => (
                           <button
                             key={item.id}
                             onClick={() => {
@@ -462,16 +464,9 @@ export default function Header({
                         transition={{ duration: 0.15 }}
                         className="overflow-hidden pl-4 pr-1 pb-3 pt-1 space-y-2.5"
                       >
-                        {[
-                          { id: 'website-dev', title: 'Website Development' },
-                          { id: 'seo', title: 'SEO Optimization' },
-                          { id: 'paid-advertising', title: 'Google Ads' },
-                          { id: 'paid-advertising', title: 'Meta Ads' },
-                          { id: 'services', title: 'Branding' },
-                          { id: 'consulting', title: 'Consulting' },
-                        ].map((srv, index) => (
+                        {serviceMenuItems.map((srv) => (
                           <button
-                            key={`${srv.id}-${index}`}
+                            key={srv.id}
                             onClick={() => {
                               setActiveTab(srv.id);
                               setIsMobileMenuOpen(false);
@@ -483,7 +478,7 @@ export default function Header({
                                 : 'border-transparent text-zinc-650 dark:text-zinc-400 hover:text-emerald-500 hover:border-emerald-500/50 pl-3'
                             }`}
                           >
-                            {srv.title}
+                            {srv.label}
                           </button>
                         ))}
                       </motion.div>

@@ -743,7 +743,7 @@ export default function App() {
               </li>
               <li>
                 <button 
-                  onClick={() => { setActiveTab('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
+                  onClick={() => { setActiveTab('ecommerce'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors text-left animate-none cursor-pointer text-zinc-800 dark:text-zinc-200"
                 >
                   Ecommerce
