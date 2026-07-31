@@ -1,4 +1,4 @@
-import { sendContactMessage } from '../lib/contact';
+import { sendContactMessage } from '../lib/contact.js';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
