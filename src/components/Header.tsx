@@ -336,10 +336,7 @@ export default function Header({
           {/* CTA Book Free Strategy Call Button */}
           <GradientButton
             onClick={() => {
-              const message = "Hi! I would like to book a Free Strategy Call. Please share your available slots.";
-              const encodedMessage = encodeURIComponent(message);
-              const whatsappUrl = `https://wa.me/918595055802?text=${encodedMessage}`;
-              window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+              setActiveTab('contact');
             }}
             className="!min-w-0 !px-4 !py-2 !text-[11px] !rounded-lg font-mono font-bold tracking-wider uppercase shadow-md shadow-purple-600/10 cursor-pointer"
             id="nav-strategy-call"

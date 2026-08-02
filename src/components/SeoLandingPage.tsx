@@ -132,7 +132,7 @@ export default function SeoLandingPage({ data, onContactClick }: SeoLandingPageP
 
             <div className="space-y-3 pt-2">
               <GradientButton
-                onClick={handleWhatsAppClick}
+                onClick={onContactClick}
                 className="w-full justify-center !py-3 font-mono font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer"
               >
                 <MessageCircle className="h-4 w-4 mr-1.5 text-emerald-400" />

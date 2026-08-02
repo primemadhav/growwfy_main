@@ -70,11 +70,7 @@ export default function Hero({ onStartJourney, onViewSeo }: HeroProps) {
               className="font-display text-4xl font-normal tracking-tight text-zinc-900 dark:text-white sm:text-5xl md:text-6.5xl leading-tight max-w-3xl lg:max-w-none text-center lg:text-left"
             >
               <span className="bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-600 dark:from-white dark:via-neutral-100 dark:to-neutral-400 bg-clip-text text-transparent font-medium">
-                We build offline
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 dark:from-purple-400 dark:via-violet-400 dark:to-purple-400 bg-clip-text text-transparent italic font-semibold">
-                businesses into brands
+                We convert
               </span>
             </motion.h1>
 

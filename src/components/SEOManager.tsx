@@ -8,8 +8,8 @@ interface SEOManagerProps {
 export default function SEOManager({ activeTab }: SEOManagerProps) {
   useEffect(() => {
     // 1. Define meta tag data maps
-    let title = 'Growwfy | High-Performance Custom React Web Development & Technical SEO Suite';
-    let description = 'Growwfy is a premium digital agency building ultra-fast React websites, custom Shopify architectures, and high-ROI technical SEO engines. Maximize your search engine visibility.';
+    let title = 'Growwfy | Web Development & SEO Agency';
+    let description = 'Growwfy is a digital agency specializing in custom websites, Shopify development, SEO, and performance optimization to help businesses grow faster online.';
     let keywords = 'digital marketing agency, web development, SEO agency, google ads, meta ads, local seo, custom react websites';
     let canonical = 'https://growwfy.com';
 
@@ -25,12 +25,12 @@ export default function SEOManager({ activeTab }: SEOManagerProps) {
     } else {
       switch (activeTab) {
         case 'home':
-          title = 'Growwfy | High-Performance Custom React Web Development & Technical SEO Suite';
-          description = 'Growwfy is a premium digital agency building ultra-fast React websites, custom Shopify architectures, and high-ROI technical SEO engines. Maximize your search engine visibility.';
+          title = 'Growwfy | Web Development & SEO Agency';
+          description = 'Growwfy is a digital agency specializing in custom websites, Shopify development, SEO, and performance optimization to help businesses grow faster online.';
           canonical = 'https://growwfy.com';
           break;
       case 'website-dev':
-        title = 'High-Performance Website Development Services | Growwfy';
+        title = 'Website Development Services | Growwfy';
         description = 'Get lightweight, blazing-fast, custom-coded React, WordPress, and E-commerce websites. 100% Google Lighthouse scores, robust security, and seamless API integrations.';
         canonical = 'https://growwfy.com/website-dev';
         break;
@@ -211,7 +211,7 @@ export default function SEOManager({ activeTab }: SEOManagerProps) {
         'Growwfy.in'
       ],
       'legalName': 'Growwfy Digital Marketing',
-      'description': 'Growwfy is a trusted premium digital marketing and web development agency establishing high-ROI technical SEO architectures, custom high-performance React web apps, and performance marketing frameworks.',
+      'description': 'Growwfy is a digital agency specializing in custom websites, Shopify development, SEO, and performance optimization to help businesses grow faster online.',
       'url': 'https://growwfy.com',
       'logo': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=120',
       'contactPoint': {
@@ -385,7 +385,7 @@ export default function SEOManager({ activeTab }: SEOManagerProps) {
     // Inject specialized Service Schema depending on activeTab
     if (['website-dev', 'seo', 'paid-advertising', 'ecommerce', 'consulting'].includes(activeTab)) {
       const serviceSchemaMap: Record<string, string> = {
-        'website-dev': 'Custom High-Performance React Web Development',
+        'website-dev': 'Custom React Web Development',
         'seo': 'Search Engine & AI Discovery Optimization (AEO/GEO)',
         'paid-advertising': 'Performance Paid Advertising (Google & Meta Ads)',
         'ecommerce': 'Shopify Theme Customization & Cart Speed Optimization',

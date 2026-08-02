@@ -50,7 +50,7 @@ const GoogleIcon = () => (
   </svg>
 );
 
-export default function SeoGuide() {
+export default function SeoGuide({ onContactClick }: { onContactClick?: () => void }) {
   const [hoveredDay, setHoveredDay] = useState<number | null>(6); // Default highlight Sunday
   const [showModal, setShowModal] = useState(false);
   const [hoveredServiceIdx, setHoveredServiceIdx] = useState<number | null>(null);
@@ -168,8 +168,8 @@ export default function SeoGuide() {
               {/* Action Button */}
               <div className="pt-2">
                 <button 
-                  onClick={() => setShowModal(true)}
-                  className="inline-flex items-center justify-center space-x-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-5 py-2.5 text-[11px] font-bold tracking-wide shadow-md hover:shadow-lg transition-all duration-150 group"
+                  onClick={onContactClick}
+                  className="inline-flex items-center justify-center space-x-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-5 py-2.5 text-[11px] font-bold tracking-wide shadow-md hover:shadow-lg transition-all duration-150 group cursor-pointer"
                 >
                   <span>FREE STRATEGY CALL</span>
                   <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
@@ -482,8 +482,8 @@ export default function SeoGuide() {
           {/* Central bottom action button */}
           <div className="flex flex-col items-center justify-center pt-16 text-center space-y-4">
             <button 
-              onClick={() => setShowModal(true)}
-              className="inline-flex items-center justify-center space-x-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-5 py-2.5 text-[11px] font-bold tracking-wide shadow-md hover:shadow-lg transition-all duration-150 group"
+              onClick={onContactClick}
+              className="inline-flex items-center justify-center space-x-1.5 rounded-lg bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-5 py-2.5 text-[11px] font-bold tracking-wide shadow-md hover:shadow-lg transition-all duration-150 group cursor-pointer"
             >
               <span>FREE STRATEGY CALL</span>
               <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
